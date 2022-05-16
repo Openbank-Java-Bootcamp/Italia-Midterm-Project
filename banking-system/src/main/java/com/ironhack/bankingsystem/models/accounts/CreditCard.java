@@ -1,19 +1,14 @@
 package com.ironhack.bankingsystem.models.accounts;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-@Entity
+@Data
+@Entity(name = "credit_card")
 public class CreditCard extends Account{
     private BigDecimal creditLimit;
     private BigDecimal interestRate;

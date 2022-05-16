@@ -1,22 +1,25 @@
 package com.ironhack.bankingsystem.models.users;
 
 import com.ironhack.bankingsystem.models.Address;
-import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-@Entity
-//@Table(name = "account_holder")
+@Data
+@Entity(name = "account_holder")
 public class AccountHolder extends User{
     private Date dateOfBirth;
-    private Address primaryAddress; //embeded
-    private Address mailingAddress; //embeded optional
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "streetAddress", column = @Column(name = "primary_address_Street_Address")),
+            @AttributeOverride(name = "city", column = @Column(name = "primary_address_city")),
+            @AttributeOverride(name = "country", column = @Column(name = "primary_address_country")),
+            @AttributeOverride(name = "postalCode", column = @Column(name = "primary_address_postalCode"))
+    })
+    private Address primaryAddress;
+    @Embedded
+    private Address mailingAddress;
 }

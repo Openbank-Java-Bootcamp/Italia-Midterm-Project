@@ -3,18 +3,14 @@ package com.ironhack.bankingsystem.models.accounts;
 
 import com.ironhack.bankingsystem.models.users.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-@Entity
+@Data
+@Entity(name = "account")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorColumn(name="account_type",
         //discriminatorType = DiscriminatorType.)
@@ -24,7 +20,11 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal balance;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "primary_owner_id")
     private User PrimaryOwner;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "secondary_owner_id")
     private User SecondaryOwner;
     private final Integer penaltyFee = 40;
 
