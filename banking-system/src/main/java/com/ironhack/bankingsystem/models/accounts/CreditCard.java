@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.models.accounts;
 
+import com.ironhack.bankingsystem.models.Money;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +11,11 @@ import java.math.BigDecimal;
 @Data
 @Entity(name = "credit_card")
 public class CreditCard extends Account{
-    private BigDecimal creditLimit;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="amount", column = @Column(name = "credit_limit_amount"))
+    })
+    private Money creditLimit;
+
     private BigDecimal interestRate;
 }

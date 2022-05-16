@@ -1,6 +1,7 @@
 package com.ironhack.bankingsystem.models.accounts;
 
 import com.ironhack.bankingsystem.enums.Status;
+import com.ironhack.bankingsystem.models.Money;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,8 +14,15 @@ import java.util.Date;
 @Entity(name = "savings")
 public class Savings extends Account{
     private String secretKey;
-    private BigDecimal minimumBalance;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="amount", column = @Column(name = "minimum_balance_amount"))
+    })
+    private Money minimumBalance;
+
     private Date creationDate;
+
     private Status status;
+
     private BigDecimal interestRate;
 }

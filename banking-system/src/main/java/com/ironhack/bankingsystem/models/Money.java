@@ -1,14 +1,19 @@
 package com.ironhack.bankingsystem.models;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Transient;
+
 import java.math.RoundingMode;
 import java.math.BigDecimal;
 import java.util.Currency;
 
+@Embeddable
 public class Money {
 
     private static final Currency USD = Currency.getInstance("USD");
     private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
+    @Transient
     private final Currency currency;
     private BigDecimal amount;
 
