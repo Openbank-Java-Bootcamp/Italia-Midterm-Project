@@ -5,7 +5,6 @@ import com.ironhack.bankingsystem.models.Money;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -18,13 +17,15 @@ public class Checking extends Account{
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name="amount", column = @Column(name = "minimum_balance_amount"))
+            @AttributeOverride(name="amount", column = @Column(name = "minimum_balance_amount")),
+            @AttributeOverride(name="currency", column = @Column(name = "currency", updatable = false, insertable = false))
     })
     private Money minimumBalance;
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name="amount", column = @Column(name = "monthly_maintenance_fee"))
+            @AttributeOverride(name="amount", column = @Column(name = "monthly_maintenance_fee")),
+            @AttributeOverride(name="currency", column = @Column(name = "currency", updatable = false, insertable = false))
     })
     private Money monthlyMaintenanceFee;
 

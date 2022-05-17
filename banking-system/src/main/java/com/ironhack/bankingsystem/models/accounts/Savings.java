@@ -16,7 +16,8 @@ public class Savings extends Account{
     private String secretKey;
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name="amount", column = @Column(name = "minimum_balance_amount"))
+            @AttributeOverride(name="amount", column = @Column(name = "minimum_balance_amount")),
+            @AttributeOverride(name="currency", column = @Column(name = "currency", updatable = false, insertable = false))
     })
     private Money minimumBalance;
 

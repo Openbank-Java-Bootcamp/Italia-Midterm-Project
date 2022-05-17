@@ -1,8 +1,10 @@
 package com.ironhack.bankingsystem.repository.users;
 
-import com.ironhack.bankingsystem.models.users.Admin;
 import com.ironhack.bankingsystem.models.users.ThirdParty;
+import com.ironhack.bankingsystem.models.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AdminRepository extends JpaRepository<Admin, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String userName);
+
 }

@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Transient;
 
@@ -13,7 +14,6 @@ public class Money {
     private static final Currency USD = Currency.getInstance("USD");
     private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
-    @Transient
     private final Currency currency;
     private BigDecimal amount;
 

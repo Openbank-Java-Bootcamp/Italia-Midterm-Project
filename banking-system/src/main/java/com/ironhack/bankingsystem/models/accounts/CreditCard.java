@@ -13,7 +13,8 @@ import java.math.BigDecimal;
 public class CreditCard extends Account{
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name="amount", column = @Column(name = "credit_limit_amount"))
+            @AttributeOverride(name="amount", column = @Column(name = "credit_limit_amount")),
+            @AttributeOverride(name="currency", column = @Column(name ="currency", updatable = false, insertable = false))
     })
     private Money creditLimit;
 

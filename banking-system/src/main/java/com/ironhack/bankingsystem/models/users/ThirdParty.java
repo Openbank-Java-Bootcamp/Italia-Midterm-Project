@@ -10,6 +10,6 @@ import static com.ironhack.bankingsystem.secureUtils.HashKey.getSHA512;
 @Data
 @Entity(name = "third_party")
 public class ThirdParty extends User{
-    private String hashedKey = getSHA512(getHashedKey());
+    private String hashedKey; //in constructor = getSHA512(getHashedKey());
 
 }

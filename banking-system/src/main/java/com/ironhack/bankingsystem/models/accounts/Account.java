@@ -6,19 +6,18 @@ import com.ironhack.bankingsystem.models.users.User;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity//(name = "account")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Entity(name = "account")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //@DiscriminatorColumn(name="account_type",
         //discriminatorType = DiscriminatorType.)
 //@Table(name = "account")
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Embedded
@@ -34,4 +33,9 @@ public class Account {
 
     private final Integer penaltyFee = 40;
 
+    public Account(Money balance, User primaryOwner, User secondaryOwner) {
+        this.balance = balance;
+        PrimaryOwner = primaryOwner;
+        SecondaryOwner = secondaryOwner;
+    }
 }
