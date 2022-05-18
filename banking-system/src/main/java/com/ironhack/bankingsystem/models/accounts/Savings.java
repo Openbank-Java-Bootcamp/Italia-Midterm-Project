@@ -26,12 +26,12 @@ public class Savings extends Account{
     private Date creationDate;
 
     private Status status;
-    @DecimalMax(value = "0.5", message = "Interest") //Setter o Service
-    @DecimalMin(value = "0", message = "")
+  /*  @DecimalMax(value = "0.5", message = "Interest") //Setter o Service
+    @DecimalMin(value = "0", message = "")*/
     @Column(precision = 32, scale = 4)
     private BigDecimal interestRate = BigDecimal.valueOf(0.0025);
 
-    public void setInterestRate(BigDecimal interestRate) {
+/*    public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate == null ? new BigDecimal("0.0025") : interestRate;
-    }
+    }*/
 }
