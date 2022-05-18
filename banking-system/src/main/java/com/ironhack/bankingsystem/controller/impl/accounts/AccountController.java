@@ -1,15 +1,30 @@
 package com.ironhack.bankingsystem.controller.impl.accounts;
 
 import com.ironhack.bankingsystem.controller.interfaces.accounts.IAccountController;
-import com.ironhack.bankingsystem.service.impl.accounts.AccountService;
+import com.ironhack.bankingsystem.models.accounts.Account;
+import com.ironhack.bankingsystem.service.interfaces.accounts.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/banking")
 public class AccountController implements IAccountController {
 
     @Autowired
-    private AccountService accountService;
+    private IAccountService accountService;
+
+    @PostMapping("/accounts")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void saveAccount(@RequestBody Account account){
+        accountService.saveAccount(account);
+    }
+
+    @GetMapping("/accounts")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Account> getAccounts(){
+        return accountService.getAccounts();
+    }
 }

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity(name = "credit_card")
+@Entity(name = "creditcard")
 public class CreditCard extends Account{
     @Embedded
     @AttributeOverrides({

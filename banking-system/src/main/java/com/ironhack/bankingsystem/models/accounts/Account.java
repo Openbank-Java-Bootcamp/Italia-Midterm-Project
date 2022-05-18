@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 @Entity(name = "account")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorColumn(name="account_type",
         //discriminatorType = DiscriminatorType.)
 //@Table(name = "account")
@@ -31,7 +31,7 @@ public class Account {
     @JoinColumn(name = "secondary_owner_id")
     private User SecondaryOwner;
 
-    private final Integer penaltyFee = 40;
+    private final Integer penaltyFee = 40; //TODO Is it best here or in constructor?
 
     public Account(Money balance, User primaryOwner, User secondaryOwner) {
         this.balance = balance;
