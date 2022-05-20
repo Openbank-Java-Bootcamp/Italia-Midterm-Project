@@ -1,18 +1,39 @@
 package com.ironhack.bankingsystem.DTO.accountDTOs;
 
-import com.ironhack.bankingsystem.DTO.MoneyDTO;
-import lombok.AllArgsConstructor;
+import com.ironhack.bankingsystem.models.Money;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CreditCardDTO extends AccountDTO {
+public class CreditCardDTO{
 
-    private MoneyDTO creditLimit;
+    private Money balance;
+
+    private Long primaryOwnerId;
+
+    private Long secondaryOwnerId;
+
+    private Money creditLimit;
 
     private BigDecimal interestRate;
+
+    public CreditCardDTO(Money balance, Long primaryOwnerId, Long secondaryOwnerId) {
+        this.balance = balance;
+        this.primaryOwnerId = primaryOwnerId;
+        this.secondaryOwnerId = secondaryOwnerId;
+    }
+
+    public CreditCardDTO(Money balance, Long primaryOwnerId, Long secondaryOwnerId,
+                         Money creditLimit, BigDecimal interestRate) {
+        this.balance = balance;
+        this.primaryOwnerId = primaryOwnerId;
+        this.secondaryOwnerId = secondaryOwnerId;
+        this.creditLimit = creditLimit;
+        this.interestRate = interestRate;
+    }
+
+
 }

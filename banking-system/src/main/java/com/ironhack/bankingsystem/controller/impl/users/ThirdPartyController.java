@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.controller.impl.users;
 
+import com.ironhack.bankingsystem.DTO.userDTOs.ThirdPartyDTO;
 import com.ironhack.bankingsystem.controller.interfaces.users.IThirdPartyController;
 import com.ironhack.bankingsystem.models.users.ThirdParty;
 import com.ironhack.bankingsystem.service.impl.users.ThirdPartyService;
@@ -21,8 +22,8 @@ public class ThirdPartyController implements IThirdPartyController {
 
     @PostMapping("/third-party")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveThirdParty(ThirdParty thirdParty) {
-        thirdPartyService.saveThirdParty(thirdParty);
+    public void saveThirdParty(ThirdPartyDTO thirdPartyDTO) {
+        thirdPartyService.saveThirdParty(thirdPartyDTO);
     }
 
     public List<ThirdParty> getThirdParties() {

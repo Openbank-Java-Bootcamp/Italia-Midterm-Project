@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.controller.impl.accounts;
 
+import com.ironhack.bankingsystem.DTO.accountDTOs.SavingsDTO;
 import com.ironhack.bankingsystem.controller.interfaces.accounts.ISavingsController;
 import com.ironhack.bankingsystem.models.accounts.Savings;
 import com.ironhack.bankingsystem.service.interfaces.accounts.ISavingsService;
@@ -18,8 +19,8 @@ public class SavingsController implements ISavingsController {
 
     @PostMapping("/savings")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveSavings(Savings savings) {
-        savingsService.saveSavings(savings);
+    public void saveSavings(SavingsDTO savingsDTO) {
+        savingsService.saveSavings(savingsDTO);
     }
 
     @GetMapping("/savings")

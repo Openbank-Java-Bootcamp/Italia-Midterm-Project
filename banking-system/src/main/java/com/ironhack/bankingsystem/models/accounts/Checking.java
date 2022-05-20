@@ -2,10 +2,13 @@ package com.ironhack.bankingsystem.models.accounts;
 
 import com.ironhack.bankingsystem.enums.Status;
 import com.ironhack.bankingsystem.models.Money;
+import com.ironhack.bankingsystem.models.users.AccountHolder;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,9 +32,19 @@ public class Checking extends Account{
     })
     private Money monthlyMaintenanceFee;
 
-    private Date creationDate;
+    private LocalDate creationDate;
 
     private Status status;
+
+    public Checking(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner,
+                    String secretKey) {
+        super(balance, primaryOwner, secondaryOwner);
+        this.secretKey = secretKey;
+        this.minimumBalance = new  Money(BigDecimal.valueOf(250));
+        this.monthlyMaintenanceFee =  new  Money(BigDecimal.valueOf(12));
+        this.creationDate = LocalDate.now();
+        this.status = Status.ACTIVE;
+    }
 
 
 }

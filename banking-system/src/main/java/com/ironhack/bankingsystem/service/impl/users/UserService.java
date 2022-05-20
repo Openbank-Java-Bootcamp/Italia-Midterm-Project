@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.service.impl.users;
 
+import com.ironhack.bankingsystem.DTO.userDTOs.UserDTO;
 import com.ironhack.bankingsystem.models.users.User;
 import com.ironhack.bankingsystem.repository.RoleRepository;
 import com.ironhack.bankingsystem.repository.users.UserRepository;
@@ -32,11 +33,11 @@ public class UserService implements IUserService, UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public User saveUser(User user){
-        log.info("Saving new user {} in database", user.getName());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
-    }
+/*    public User saveUser(UserDTO userDTO){
+        log.info("Saving new user {} in database", userDTO.getName());
+        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        return userRepository.save(userDTO);
+    }*/
 
     public List<User> getUsers(){
         log.info("Fetching all users");

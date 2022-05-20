@@ -1,10 +1,15 @@
 package com.ironhack.bankingsystem.service.interfaces.accounts;
 
+import com.ironhack.bankingsystem.DTO.accountDTOs.SavingsDTO;
+import com.ironhack.bankingsystem.models.Money;
 import com.ironhack.bankingsystem.models.accounts.Savings;
 
 import java.util.List;
 
 public interface ISavingsService {
-    Savings saveSavings(Savings savings);
+    Savings saveSavings(SavingsDTO savingsDTO);
     List<Savings> getSavings();
+
+    Money findBalanceById(Long id);
+
 }

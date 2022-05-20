@@ -15,11 +15,11 @@ public class UserController implements IUserController {
     @Autowired
     private IUserService userService;
 
-    @PostMapping("/users")
+/*    @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveUser(@RequestBody User user){
         userService.saveUser(user);
-    }
+    }*/
 
     @GetMapping("/users")
     @ResponseStatus(HttpStatus.OK)

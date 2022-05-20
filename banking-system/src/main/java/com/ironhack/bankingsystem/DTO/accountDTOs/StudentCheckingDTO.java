@@ -1,18 +1,27 @@
 package com.ironhack.bankingsystem.DTO.accountDTOs;
 
 import com.ironhack.bankingsystem.enums.Status;
-import jakarta.persistence.Entity;
+import com.ironhack.bankingsystem.models.Money;
+import com.ironhack.bankingsystem.models.users.AccountHolder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class StudentCheckingDTO extends AccountDTO {
+public class StudentCheckingDTO {
+    private Money balance;
+    private Long primaryOwnerId;
+    private Long secondaryOwnerId;
     private String secretKey;
-    private Date creationDate;
-    private Status status;
+
+    public StudentCheckingDTO(Money balance, Long primaryOwnerId, Long secondaryOwnerId, String secretKey) {
+        this.balance = balance;
+        this.primaryOwnerId = primaryOwnerId;
+        this.secondaryOwnerId = secondaryOwnerId;
+        this.secretKey = secretKey;
+    }
+
 }

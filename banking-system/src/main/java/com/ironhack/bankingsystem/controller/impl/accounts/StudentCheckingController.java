@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.controller.impl.accounts;
 
+import com.ironhack.bankingsystem.DTO.accountDTOs.StudentCheckingDTO;
 import com.ironhack.bankingsystem.controller.interfaces.accounts.IStudentCheckingController;
 import com.ironhack.bankingsystem.models.accounts.StudentChecking;
 import com.ironhack.bankingsystem.service.interfaces.accounts.IStudentCheckingService;
@@ -16,11 +17,11 @@ public class StudentCheckingController implements IStudentCheckingController {
     @Autowired
     private IStudentCheckingService studentCheckingService;
 
-    @PostMapping("/student-checking")
+/*    @PostMapping("/student-checking")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveStudentChecking(StudentChecking studentChecking) {
-        studentCheckingService.saveStudentChecking(studentChecking);
-    }
+    public void saveStudentChecking(StudentCheckingDTO studentCheckingDTO) {
+        studentCheckingService.saveStudentChecking(studentCheckingDTO);
+    }*/
 
     @GetMapping("/student-checking")
     @ResponseStatus(HttpStatus.OK)

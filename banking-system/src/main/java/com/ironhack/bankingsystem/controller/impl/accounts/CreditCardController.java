@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.controller.impl.accounts;
 
+import com.ironhack.bankingsystem.DTO.accountDTOs.CreditCardDTO;
 import com.ironhack.bankingsystem.controller.interfaces.accounts.ICreditCardController;
 import com.ironhack.bankingsystem.models.accounts.CreditCard;
 import com.ironhack.bankingsystem.service.interfaces.accounts.ICreditCardService;
@@ -18,8 +19,8 @@ public class CreditCardController implements ICreditCardController {
 
     @PostMapping("/creditcards")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveCreditCard(CreditCard creditCard) {
-        creditCardService.saveCreditCard(creditCard);
+    public void saveCreditCard(CreditCardDTO creditCardDTO) {
+        creditCardService.saveCreditCard(creditCardDTO);
     }
 
     @GetMapping("/creditcards")

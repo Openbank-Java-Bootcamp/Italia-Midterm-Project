@@ -1,6 +1,8 @@
 package com.ironhack.bankingsystem.service.impl.users;
 
+import com.ironhack.bankingsystem.DTO.userDTOs.AccountHolderDTO;
 import com.ironhack.bankingsystem.models.users.AccountHolder;
+import com.ironhack.bankingsystem.repository.accounts.AccountRepository;
 import com.ironhack.bankingsystem.repository.users.AccountHolderRepository;
 import com.ironhack.bankingsystem.service.interfaces.users.IAccountHolderService;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +22,15 @@ public class AccountHolderService implements IAccountHolderService {
     private AccountHolderRepository accountHolderRepository;
 
     @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public AccountHolder saveAccountHolder(AccountHolder accountHolder) {
+    public AccountHolder saveAccountHolder(AccountHolderDTO aHDTO) {
+        AccountHolder accountHolder = new AccountHolder(aHDTO.getName(),aHDTO.getUsername(),  aHDTO.getPassword(), aHDTO.getRoles(), aHDTO.getAccounts(),
+                aHDTO.getDateOfBirth(), aHDTO.getPrimaryAddress(),
+                aHDTO.getMailingAddress());
         log.info("Saving Account Holder {} in database", accountHolder.getName());
         accountHolder.setPassword(passwordEncoder.encode(accountHolder.getPassword()));
         return accountHolderRepository.save(accountHolder);
@@ -32,4 +40,11 @@ public class AccountHolderService implements IAccountHolderService {
         log.info("Fetching all Account Holders");
         return accountHolderRepository.findAll();
     }
+
+/*    public void addAccountToHolder(Long accountId, Long accountHolderId) {
+
+        AccountHolder holder = accountHolderRepository.findById(accountHolderId).get();
+        holder.getAccounts().add(accountId.)
+
+    }*/
 }

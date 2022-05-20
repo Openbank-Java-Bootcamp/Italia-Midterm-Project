@@ -5,6 +5,7 @@ import com.ironhack.bankingsystem.models.accounts.Account;
 import java.util.List;
 
 public interface IAccountController {
-    void saveAccount(Account account);
+    //void saveAccount(Account account);
     List<Account> getAccounts();
+
 }

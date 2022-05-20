@@ -16,15 +16,17 @@ public class AccountController implements IAccountController {
     @Autowired
     private IAccountService accountService;
 
-    @PostMapping("/accounts")
+    /*@PostMapping("/accounts")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveAccount(@RequestBody Account account){
         accountService.saveAccount(account);
-    }
+    }*/
 
     @GetMapping("/accounts")
     @ResponseStatus(HttpStatus.OK)
     public List<Account> getAccounts(){
         return accountService.getAccounts();
     }
+
+
 }
