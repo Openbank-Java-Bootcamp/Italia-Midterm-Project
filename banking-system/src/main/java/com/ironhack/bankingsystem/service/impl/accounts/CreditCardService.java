@@ -1,7 +1,9 @@
 package com.ironhack.bankingsystem.service.impl.accounts;
 
+import com.ironhack.bankingsystem.DTO.AccountBalanceDTO;
 import com.ironhack.bankingsystem.DTO.accountDTOs.CreditCardDTO;
 import com.ironhack.bankingsystem.models.Money;
+import com.ironhack.bankingsystem.models.accounts.Checking;
 import com.ironhack.bankingsystem.models.accounts.CreditCard;
 import com.ironhack.bankingsystem.models.users.AccountHolder;
 import com.ironhack.bankingsystem.repository.accounts.CreditCardRepository;
@@ -43,7 +45,7 @@ public class CreditCardService implements ICreditCardService {
                     creditCardDTO.getCreditLimit(), creditCardDTO.getInterestRate()));
 
         }else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The account Holder Id doesn't exist.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The account Holder Id wasn't found.");
         }
     }
 
@@ -57,6 +59,18 @@ public class CreditCardService implements ICreditCardService {
             log.info("Fetching Account Balance");
             return creditCardRepository.findById(id).get().getBalance();
         }else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
+        }
+    }
+
+    public void modifyBalance(Long id, AccountBalanceDTO accountBalanceDTO) {
+        Optional<CreditCard> account = creditCardRepository.findById(id);
+        if (account.isPresent()) {
+
+            account.get().setBalance(accountBalanceDTO.getBalance());
+            creditCardRepository.save(account.get());
+
+        } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
         }
     }

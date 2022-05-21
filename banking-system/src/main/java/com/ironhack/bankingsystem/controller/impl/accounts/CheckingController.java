@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.controller.impl.accounts;
 
+import com.ironhack.bankingsystem.DTO.AccountBalanceDTO;
 import com.ironhack.bankingsystem.DTO.accountDTOs.CheckingDTO;
 import com.ironhack.bankingsystem.DTO.accountDTOs.StudentCheckingDTO;
 import com.ironhack.bankingsystem.controller.interfaces.accounts.ICheckingController;
@@ -9,6 +10,7 @@ import com.ironhack.bankingsystem.models.users.AccountHolder;
 import com.ironhack.bankingsystem.repository.users.AccountHolderRepository;
 import com.ironhack.bankingsystem.service.interfaces.accounts.ICheckingService;
 import com.ironhack.bankingsystem.service.interfaces.accounts.IStudentCheckingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -66,4 +68,11 @@ public class CheckingController implements ICheckingController {
 
         return checkingService.findBalanceById(id);
     }
+
+    @PatchMapping("/checkings/balance/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void modifyBalance(@PathVariable Long id, @RequestBody @Valid AccountBalanceDTO accountBalanceDTO) {
+        checkingService.modifyBalance(id, accountBalanceDTO );
+    }
+
 }

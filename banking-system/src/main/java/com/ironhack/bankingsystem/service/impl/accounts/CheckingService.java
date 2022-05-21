@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.service.impl.accounts;
 
+import com.ironhack.bankingsystem.DTO.AccountBalanceDTO;
 import com.ironhack.bankingsystem.DTO.accountDTOs.CheckingDTO;
 import com.ironhack.bankingsystem.enums.Status;
 import com.ironhack.bankingsystem.models.Money;
@@ -18,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -44,7 +46,7 @@ public class CheckingService implements ICheckingService {
                     checkingDTO.getSecretKey()));
 
         }else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The account Holder Id doesn't exist.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The account Holder Id wasn't found.");
         }
     }
 
@@ -64,6 +66,18 @@ public class CheckingService implements ICheckingService {
             log.info("Fetching Account Balance");
             return studentCheckingRepository.findById(id).get().getBalance();*/
         }else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
+        }
+    }
+
+    public void modifyBalance(Long id, AccountBalanceDTO accountBalanceDTO) {
+        Optional<Checking> account = checkingRepository.findById(id);
+        if (account.isPresent()) {
+
+            account.get().setBalance(accountBalanceDTO.getBalance());
+            checkingRepository.save(account.get());
+
+        } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
         }
     }

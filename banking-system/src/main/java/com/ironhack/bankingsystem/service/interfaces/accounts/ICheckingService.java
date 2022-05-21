@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.service.interfaces.accounts;
 
+import com.ironhack.bankingsystem.DTO.AccountBalanceDTO;
 import com.ironhack.bankingsystem.DTO.accountDTOs.CheckingDTO;
 import com.ironhack.bankingsystem.models.Money;
 import com.ironhack.bankingsystem.models.accounts.Checking;
@@ -12,5 +13,5 @@ public interface ICheckingService {
 
     Money findBalanceById(Long id);
 
-    /*Money setBalance();*/
+    void modifyBalance(Long id, AccountBalanceDTO accountBalanceDTO);
 }

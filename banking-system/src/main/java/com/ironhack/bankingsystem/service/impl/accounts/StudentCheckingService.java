@@ -1,7 +1,9 @@
 package com.ironhack.bankingsystem.service.impl.accounts;
 
+import com.ironhack.bankingsystem.DTO.AccountBalanceDTO;
 import com.ironhack.bankingsystem.DTO.accountDTOs.StudentCheckingDTO;
 import com.ironhack.bankingsystem.models.Money;
+import com.ironhack.bankingsystem.models.accounts.Savings;
 import com.ironhack.bankingsystem.models.accounts.StudentChecking;
 import com.ironhack.bankingsystem.repository.accounts.StudentCheckingRepository;
 import com.ironhack.bankingsystem.repository.users.AccountHolderRepository;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -40,7 +43,7 @@ public class StudentCheckingService implements IStudentCheckingService {
             return studentCheckingRepository.save(studentChecking);
 
         }else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The account Holder Id doesn't exist.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The account Holder Id wasn't found.");
         }
     }
 
@@ -56,6 +59,18 @@ public class StudentCheckingService implements IStudentCheckingService {
             return studentCheckingRepository.findById(id).get().getBalance();
 
         }else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
+        }
+    }
+
+    public void modifyBalance(Long id, AccountBalanceDTO accountBalanceDTO) {
+        Optional<StudentChecking> account = studentCheckingRepository.findById(id);
+        if (account.isPresent()) {
+
+            account.get().setBalance(accountBalanceDTO.getBalance());
+            studentCheckingRepository.save(account.get());
+
+        } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
         }
     }

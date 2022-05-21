@@ -1,5 +1,6 @@
 package com.ironhack.bankingsystem.service.interfaces.accounts;
 
+import com.ironhack.bankingsystem.DTO.AccountBalanceDTO;
 import com.ironhack.bankingsystem.DTO.accountDTOs.CreditCardDTO;
 import com.ironhack.bankingsystem.models.Money;
 import com.ironhack.bankingsystem.models.accounts.CreditCard;
@@ -11,5 +12,7 @@ public interface ICreditCardService {
     List<CreditCard> getCreditCards();
 
     Money findBalanceById(Long id);
+
+    void modifyBalance(Long id, AccountBalanceDTO accountBalanceDTO);
 
 }
