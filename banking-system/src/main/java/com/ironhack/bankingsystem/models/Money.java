@@ -26,6 +26,10 @@ public class Money {
         setAmount(amount.setScale(currency.getDefaultFractionDigits(), rounding));
     }
 
+    public Money() {
+        currency = Currency.getInstance("EUR");
+    }
+
     /**
      * Class constructor specifying amount, and currency. Uses default RoundingMode HALF_EVEN.
      **/

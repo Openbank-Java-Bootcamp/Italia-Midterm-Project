@@ -64,7 +64,7 @@ public class CheckingService implements ICheckingService {
             log.info("Fetching Account Balance");
             return studentCheckingRepository.findById(id).get().getBalance();*/
         }else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The account Holder Id doesn't exist.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
         }
     }
 }

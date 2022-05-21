@@ -2,6 +2,7 @@ package com.ironhack.bankingsystem.controller.impl.accounts;
 
 import com.ironhack.bankingsystem.DTO.accountDTOs.CreditCardDTO;
 import com.ironhack.bankingsystem.controller.interfaces.accounts.ICreditCardController;
+import com.ironhack.bankingsystem.models.Money;
 import com.ironhack.bankingsystem.models.accounts.CreditCard;
 import com.ironhack.bankingsystem.service.interfaces.accounts.ICreditCardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class CreditCardController implements ICreditCardController {
 
     @PostMapping("/creditcards")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveCreditCard(CreditCardDTO creditCardDTO) {
+    public void saveCreditCard(@RequestBody CreditCardDTO creditCardDTO) {
         creditCardService.saveCreditCard(creditCardDTO);
     }
 
@@ -27,5 +28,12 @@ public class CreditCardController implements ICreditCardController {
     @ResponseStatus(HttpStatus.OK)
     public List<CreditCard> getCreditCards() {
         return creditCardService.getCreditCards();
+    }
+
+    @GetMapping("/creditcards/balance/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Money getBalance(@PathVariable Long id){
+
+        return creditCardService.findBalanceById(id);
     }
 }

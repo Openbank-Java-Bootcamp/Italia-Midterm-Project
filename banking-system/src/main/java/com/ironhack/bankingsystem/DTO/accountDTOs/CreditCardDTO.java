@@ -1,6 +1,7 @@
 package com.ironhack.bankingsystem.DTO.accountDTOs;
 
 import com.ironhack.bankingsystem.models.Money;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
 public class CreditCardDTO{
 
     private Money balance;
@@ -26,14 +28,6 @@ public class CreditCardDTO{
         this.secondaryOwnerId = secondaryOwnerId;
     }
 
-    public CreditCardDTO(Money balance, Long primaryOwnerId, Long secondaryOwnerId,
-                         Money creditLimit, BigDecimal interestRate) {
-        this.balance = balance;
-        this.primaryOwnerId = primaryOwnerId;
-        this.secondaryOwnerId = secondaryOwnerId;
-        this.creditLimit = creditLimit;
-        this.interestRate = interestRate;
-    }
 
 
 }

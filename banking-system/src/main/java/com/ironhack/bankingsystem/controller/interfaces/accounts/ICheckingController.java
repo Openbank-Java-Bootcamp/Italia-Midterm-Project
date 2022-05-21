@@ -10,5 +10,5 @@ public interface ICheckingController {
     void saveChecking(CheckingDTO checkingDTO);
     List<Checking> getCheckings();
 
-    /*Money getBalance(Long id);*/
+    Money getBalance(Long id);
 }

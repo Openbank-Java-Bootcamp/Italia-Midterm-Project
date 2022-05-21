@@ -43,6 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/banking/login/**").permitAll();
         http.authorizeRequests().antMatchers(POST, "/banking/accounts/**").hasAnyAuthority("ROLE_ADMIN");
+
+        //        http.authorizeRequests().antMatchers(GET, "/banking/accounts/**/balance/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(GET, "/banking/accounts/checkings/balance/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(GET, "/banking/accounts/creditcards/balance/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(GET, "/banking/accounts/savings/balance/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(GET, "/banking/accounts/student-checkings/balance/**").hasAnyAuthority("ROLE_ADMIN");
+
         http.authorizeRequests().antMatchers(POST, "/banking/users/third-party").hasAnyAuthority("ROLE_ADMIN");
         /*http.authorizeRequests().antMatchers(GET, "/api/posts/**").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/authors/**").permitAll();

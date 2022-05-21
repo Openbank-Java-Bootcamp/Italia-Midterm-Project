@@ -50,14 +50,13 @@ public class StudentCheckingService implements IStudentCheckingService {
     }
 
     public Money findBalanceById(Long id) {
-        var account = studentCheckingRepository.findById(id);
-        if (account.isPresent()) {
+        if (studentCheckingRepository.findById(id).isPresent()) {
 
             log.info("Fetching Account Balance");
             return studentCheckingRepository.findById(id).get().getBalance();
 
         }else{
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The account Id doesn't exist.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
         }
     }
 }

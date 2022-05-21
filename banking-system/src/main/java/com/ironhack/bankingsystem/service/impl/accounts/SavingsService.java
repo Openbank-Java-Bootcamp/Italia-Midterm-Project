@@ -51,7 +51,11 @@ public class SavingsService implements ISavingsService {
     }
 
     public Money findBalanceById(Long id) {
-        log.info("Fetching Account Balance");
-        return savingsRepository.findById(id).get().getBalance();
+        if (savingsRepository.findById(id).isPresent()) {
+            log.info("Fetching Account Balance");
+            return savingsRepository.findById(id).get().getBalance();
+        }else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
+        }
     }
 }

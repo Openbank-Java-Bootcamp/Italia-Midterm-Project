@@ -1,7 +1,7 @@
 package com.ironhack.bankingsystem.controller.impl.accounts;
 
-import com.ironhack.bankingsystem.DTO.accountDTOs.StudentCheckingDTO;
 import com.ironhack.bankingsystem.controller.interfaces.accounts.IStudentCheckingController;
+import com.ironhack.bankingsystem.models.Money;
 import com.ironhack.bankingsystem.models.accounts.StudentChecking;
 import com.ironhack.bankingsystem.service.interfaces.accounts.IStudentCheckingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +23,16 @@ public class StudentCheckingController implements IStudentCheckingController {
         studentCheckingService.saveStudentChecking(studentCheckingDTO);
     }*/
 
-    @GetMapping("/student-checking")
+    @GetMapping("/student-checkings")
     @ResponseStatus(HttpStatus.OK)
     public List<StudentChecking> getStudentCheckings() {
         return studentCheckingService.getStudentCheckings();
+    }
+
+    @GetMapping("/student-checkings/balance/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Money getBalance(@PathVariable Long id){
+
+        return studentCheckingService.findBalanceById(id);
     }
 }
