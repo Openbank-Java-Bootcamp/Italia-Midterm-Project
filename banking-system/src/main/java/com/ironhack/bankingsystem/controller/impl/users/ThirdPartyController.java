@@ -32,13 +32,13 @@ public class ThirdPartyController implements IThirdPartyController {
 
     @PostMapping("/third-party/send-transaction")
     @ResponseStatus(HttpStatus.CREATED)
-    public void makeThirdPartySendTransaction(ThirdPartyDTO thirdPartyDTO, Long targetId, Money transactionAmount) {
+    public void makeThirdPartySendTransaction(@RequestBody ThirdPartyDTO thirdPartyDTO, Long targetId, Money transactionAmount) {
 
     }
 
     @PostMapping("/third-party/receive-transaction")
     @ResponseStatus(HttpStatus.CREATED)
-    public void makeThirdPartyReceiveTransaction(ThirdPartyDTO thirdPartyDTO, Long requesterId, Money transactionAmount) {
+    public void makeThirdPartyReceiveTransaction(@RequestBody ThirdPartyDTO thirdPartyDTO, Long requesterId, Money transactionAmount) {
 
     }
 }
