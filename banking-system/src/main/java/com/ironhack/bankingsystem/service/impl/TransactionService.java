@@ -1,16 +1,19 @@
 package com.ironhack.bankingsystem.service.impl;
 
 import com.ironhack.bankingsystem.DTO.TransactionDTO;
+import com.ironhack.bankingsystem.DTO.userDTOs.ThirdPartyDTO;
 import com.ironhack.bankingsystem.enums.Status;
 import com.ironhack.bankingsystem.models.Money;
 import com.ironhack.bankingsystem.models.Transaction;
 import com.ironhack.bankingsystem.models.accounts.Account;
 import com.ironhack.bankingsystem.models.accounts.Checking;
 import com.ironhack.bankingsystem.models.accounts.Savings;
+import com.ironhack.bankingsystem.models.users.ThirdParty;
 import com.ironhack.bankingsystem.repository.TransactionRepository;
 import com.ironhack.bankingsystem.repository.accounts.AccountRepository;
 import com.ironhack.bankingsystem.repository.accounts.CheckingRepository;
 import com.ironhack.bankingsystem.repository.accounts.SavingsRepository;
+import com.ironhack.bankingsystem.repository.users.ThirdPartyRepository;
 import com.ironhack.bankingsystem.service.interfaces.ITransactionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,13 +42,14 @@ public class TransactionService implements ITransactionService {
     @Autowired
     private SavingsRepository savingsRepository;
 
+    @Autowired
+    private ThirdPartyRepository thirdPartyRepository;
+
+
     public Transaction saveTransaction(Transaction transaction) {
 
         return transactionRepository.save(transaction);
     }
-
-
-
 
     public void validateTransaction(TransactionDTO transactionDTO) {
 
@@ -170,4 +174,62 @@ public class TransactionService implements ITransactionService {
     }
 
 
+    public Transaction makeThirdPartySendTransaction(ThirdPartyDTO thirdPartyDTO, Long targetId, Money transactionAmount) {
+        Optional<Account> targetAccount = accountRepository.findById(targetId);
+        ThirdParty requesterThirdParty = thirdPartyRepository.findByName(thirdPartyDTO.getName());
+
+        if(targetAccount.isPresent()){
+
+        Transaction transaction = new Transaction( requesterThirdParty.getName(),
+                targetId, transactionAmount);
+
+
+            log.info("Your transaction has been accepted");
+
+            BigDecimal targetBalance = targetAccount.get().getBalance().getAmount();
+
+            targetAccount.get().setBalance(new Money(targetBalance.add(transactionAmount.getAmount()),
+                    transactionAmount.getCurrency()));
+
+            accountRepository.save(targetAccount.get());
+
+            return transactionRepository.save(transaction);
+        }else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Your transaction wasn't implemented, please provide all information");
+        }
+    }
+
+
+    public Transaction makeThirdPartyReceiveTransaction(ThirdPartyDTO thirdPartyDTO, Long requesterId, Money transactionAmount) {
+        Optional<Account> requesterAccount = accountRepository.findById(requesterId);
+        ThirdParty requesterThirdParty = thirdPartyRepository.findByName(thirdPartyDTO.getName());
+
+        if(requesterAccount.isPresent()){
+
+            BigDecimal requesterBalance = requesterAccount.get().getBalance().getAmount();
+
+            if(requesterBalance.compareTo(transactionAmount.getAmount())==1 || requesterBalance.compareTo(transactionAmount.getAmount())==0){
+
+                Transaction transaction = new Transaction( requesterThirdParty.getName(),
+                        requesterId, transactionAmount);
+
+
+                log.info("Your transaction has been accepted");
+
+                BigDecimal targetBalance = requesterAccount.get().getBalance().getAmount();
+
+                requesterAccount.get().setBalance(new Money(targetBalance.subtract(transactionAmount.getAmount()),
+                        transactionAmount.getCurrency()));
+
+                accountRepository.save(requesterAccount.get());
+
+                return transactionRepository.save(transaction);
+
+            }else{
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Your transaction is invalid,  insufficient founds");
+
+            }
+        }else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Your transaction wasn't implemented, please provide all information");
+        }    }
 }

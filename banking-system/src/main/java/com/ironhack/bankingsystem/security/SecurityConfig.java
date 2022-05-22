@@ -53,7 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(PATCH, "/banking/accounts/creditcards/balance/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(PATCH, "/banking/accounts/savings/balance/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(PATCH, "/banking/accounts/student-checkings/balance/**").hasAnyAuthority("ROLE_ADMIN");
-
         http.authorizeRequests().antMatchers(POST, "/banking/users/third-party").hasAnyAuthority("ROLE_ADMIN");
         /*http.authorizeRequests().antMatchers(GET, "/api/posts/**").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/authors/**").permitAll();

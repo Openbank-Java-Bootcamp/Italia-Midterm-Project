@@ -19,4 +19,6 @@ public class TransactionController implements ITransactionController {
     public void makeTransaction(@RequestBody TransactionDTO transactionDTO) {
         transactionService.makeTransaction(transactionDTO);
     }
+
+    //Third Party transactions are stated from Third Party Controller
 }

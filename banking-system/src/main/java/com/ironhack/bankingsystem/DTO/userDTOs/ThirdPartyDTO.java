@@ -15,8 +15,6 @@ import java.util.Collection;
 public class ThirdPartyDTO {
 
     private String name;
-    //private String username;
-    //private Collection<Role> roles = new ArrayList<>();
-    private String hashedKey; //in service = getSHA512(getHashedKey());
+    private String hashedKey;
 
 }

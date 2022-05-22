@@ -25,6 +25,6 @@ public class ThirdParty{
 
     public ThirdParty(String name, String hashedKey) {
         this.name = name;
-        this.hashedKey = hashedKey;
+        getSHA512(hashedKey);
     }
 }

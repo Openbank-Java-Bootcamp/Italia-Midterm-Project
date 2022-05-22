@@ -24,6 +24,8 @@ public class Transaction {
 
         private Long targetAccountId;
 
+        private String thirdPartyName;
+
         private Money amount;
 
         public Transaction(Long requesterAccountId, Long targetAccountId, Money amount) {
@@ -31,4 +33,11 @@ public class Transaction {
                 this.targetAccountId = targetAccountId;
                 this.amount = amount;
         }
+
+        public Transaction(String thirdPartyName, Long targetAccountId, Money amount) {
+                this.thirdPartyName = thirdPartyName;
+                this.targetAccountId = targetAccountId;
+                this.amount = amount;
+        }
+
 }
