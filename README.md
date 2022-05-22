@@ -22,7 +22,11 @@ The project was developed using a Java/Spring Boot backend.
 
 3.Models
 
-![image](https://user-images.githubusercontent.com/33453535/169715419-b64ead24-3c40-473e-ad25-093993ec83ab.png)
+![image](https://user-images.githubusercontent.com/33453535/169715419-b64ead24-3c40-473e-ad25-093993ec83ab.png)<br>
+![image](https://user-images.githubusercontent.com/33453535/169715493-0c1bd7ce-494a-4584-93e2-0817e4da684a.png)<br>
+![image](https://user-images.githubusercontent.com/33453535/169716124-248d4436-9485-40a0-8925-5147ac65964c.png)<br>
+
+
 
 
 4.Server routes table(Method, Route or URL, Description as columns)
@@ -50,49 +54,49 @@ The project was developed using a Java/Spring Boot backend.
               "currency": "EUR"<br>
           },<br>
           "monthlyMaintenanceFee": {<br>
-              "amount": 0,
-              "currency": "EUR"
-          }
-      }
+              "amount": 0,<br>
+              "currency": "EUR"<br>
+          }<br>
+      }<br>
 
 
-  - /banking/users/account-holder
-  With a raw Json body such as:
-       {
-        "name": "Gilda Doe",
-        "username": "gilda",
-        "password": "imgilda",
-        "roles": [
-            {
-                "id": 1,
-                "name": "ROLE_USER"
-            }
-        ],
-        "accounts": [],
-        "dateOfBirth": "2001-02-27",
-        "primaryAddress": {},
-        "mailingAddress": {}
-    }
+  - /banking/users/account-holder<br>
+  With a raw Json body such as:<br>
+       {<br>
+        "name": "Gilda Doe",<br>
+        "username": "gilda",<br>
+        "password": "imgilda",<br>
+        "roles": [<br>
+            {<br>
+                "id": 1,<br>
+                "name": "ROLE_USER"<br>
+            }<br>
+        ],<br>
+        "accounts": [],<br>
+        "dateOfBirth": "2001-02-27",<br>
+        "primaryAddress": {},<br>
+        "mailingAddress": {}<br>
+    }<br>
     
-  - /banking/third-party
-  With a raw Json body such as:
-  {
-        "name": "Manuela Morales",
-        "ashedKey": 1234
-    }
+  - /banking/third-party<br>
+  With a raw Json body such as:<br>
+  {<br>
+        "name": "Manuela Morales",<br>
+        "ashedKey": 1234<br>
+    }<br>
   
   - /banking/third-party/send-transaction
   - /banking/third-party/receive-transaction
-  - /banking/transactions
-  All with a similar raw Json body such as:
-    {
-        "requesterAccountId": 3,
-        "targetAccountId": 4,
-        "amount":{
-            "amount": 50,
-            "currency":"EUR"
-        }
-    }
+  - /banking/transactions<br>
+  All with a similar raw Json body such as:<br>
+    {<br>
+        "requesterAccountId": 3,<br>
+        "targetAccountId": 4,<br>
+        "amount":{<br>
+            "amount": 50,<br>
+            "currency":"EUR"<br>
+        }<br>
+    }<br>
     
    - /banking/roles
    - /banking/roles/adduser
@@ -118,25 +122,25 @@ The project was developed using a Java/Spring Boot backend.
   - /banking/creditcards/balance/{id}
   - /banking/savings/balance/{id}
   - /banking/student-checkings/balance/{id}
-  <br>All with a similar raw Json body such as:
-       {
-        "balance":{
-            "amount": 1000,
-            "currency": "EUR"
-          }
-      }
+  <br>All with a similar raw Json body such as:<br>
+       {<br>
+        "balance":{<br>
+            "amount": 1000,<br>
+            "currency": "EUR"<br>
+          }<br>
+      }<br>
    
 
 
 5.Future Work
 
-The project can be improved by adding further validation and error handling with their proper testing.
-Bonus features such as fraud detection could be implemented.
-And an over all bettered architectural design.
+The project can be improved by adding further validation and error handling with their proper testing.<br>
+Bonus features such as fraud detection could be implemented.<br>
+And an over all bettered architectural design.<br>
 
-As for continuing the project, further features could be implemented to resemble the banking systems we all know and use. 
+As for continuing the project, further features could be implemented to resemble the banking systems we all know and use. <br>
 
 6.Resources
 
-Overall relied on previous teachings and projects. Aswell as web searches through Google, Baeldung, Oracle, StackOverflow and Thorben-Janssen mainly.
-Learned a valuable lesson on relying more on my Mentors and Peers which I wish I reached out to earlier. I am greatfull for all the advice and gidance they shared with me.
+Overall relied on previous teachings and projects. Aswell as web searches through Google, Baeldung, Oracle, StackOverflow and Thorben-Janssen mainly.<br>
+Learned a valuable lesson on relying more on my Mentors and Peers which I wish I reached out to earlier. I am greatfull<br> for all the advice and gidance they shared with me.
