@@ -34,6 +34,7 @@ public class BankingSystemApplication {
 		return args -> {
 			roleService.saveRole(new Role(null, "ROLE_USER"));
 			roleService.saveRole(new Role(null, "ROLE_ADMIN"));
+			roleService.saveRole(new Role(null, "ACCOUNT_HOLDER"));
 
 
 

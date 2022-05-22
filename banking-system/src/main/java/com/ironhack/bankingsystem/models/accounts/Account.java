@@ -6,6 +6,8 @@ import com.ironhack.bankingsystem.models.users.AccountHolder;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +30,7 @@ public class Account {
     @JoinColumn(name = "secondary_owner_id")
     private AccountHolder SecondaryOwner;
 
-    private final Integer penaltyFee = 40;
+    private final BigDecimal penaltyFee = BigDecimal.valueOf(40);
 
     public Account(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
         this.balance = balance;

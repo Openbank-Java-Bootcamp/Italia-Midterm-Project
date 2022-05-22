@@ -20,10 +20,15 @@ public class Transaction {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 
-        private Long requestAccountId;
+        private Long requesterAccountId;
 
-        private Long responseAccountId;
+        private Long targetAccountId;
 
         private Money amount;
 
+        public Transaction(Long requesterAccountId, Long targetAccountId, Money amount) {
+                this.requesterAccountId = requesterAccountId;
+                this.targetAccountId = targetAccountId;
+                this.amount = amount;
+        }
 }
