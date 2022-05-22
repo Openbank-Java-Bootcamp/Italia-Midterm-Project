@@ -77,7 +77,7 @@ public class TransactionService implements ITransactionService {
         Optional<Account> requesterAccount = accountRepository.findById(transactionDTO.getRequesterAccountId());
         Optional<Account> targetAccount = accountRepository.findById(transactionDTO.getTargetAccountId());
 
-        if(requesterAccount.isPresent() && targetAccount.isEmpty()){
+        if(requesterAccount.isPresent() && targetAccount.isPresent()){
 
             log.info("Your transaction has been accepted");
 
@@ -126,7 +126,6 @@ public class TransactionService implements ITransactionService {
             }
         }
 
-
         if(targetAccount.get().getClass().equals(Checking.class)){
             Optional<Checking> checkingAccount = checkingRepository.findById(transactionDTO.getRequesterAccountId());
             BigDecimal requesterMinBalance = checkingAccount.get().getMinimumBalance() .getAmount();
@@ -139,7 +138,7 @@ public class TransactionService implements ITransactionService {
 
         }else if(targetAccount.get().getClass().equals(Savings.class)){
             Optional<Savings> savingsAccount = savingsRepository.findById(transactionDTO.getRequesterAccountId());
-            BigDecimal requesterMinBalance = savingsAccount.get().getMinimumBalance() .getAmount();
+            BigDecimal requesterMinBalance = savingsAccount.get().getMinimumBalance().getAmount();
 
             if(requesterBalance.compareTo(requesterMinBalance)==-1){
                 log.info("You have passed the minimum balance, penalty fee was applied.");

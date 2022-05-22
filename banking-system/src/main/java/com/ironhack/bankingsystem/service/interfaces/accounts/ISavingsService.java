@@ -15,4 +15,6 @@ public interface ISavingsService {
 
     void modifyBalance(Long id, AccountBalanceDTO accountBalanceDTO);
 
+    void addInterest(Long id);
+
 }

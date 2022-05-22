@@ -16,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,9 +56,27 @@ public class CreditCardService implements ICreditCardService {
         return creditCardRepository.findAll();
     }
 
+    public void addInterest(Long id) {
+        LocalDate dateNow = LocalDate.now();
+        LocalDate creationDate = creditCardRepository.findById(id).get().getCreationDate();
+        var accountAge = dateNow.getYear() - creationDate.getYear();
+
+        if (accountAge >= 1) {
+            log.info("Interest Rate was added to your account");
+            Money accountBalance = creditCardRepository.findById(id).get().getBalance();
+            BigDecimal accountInterest = creditCardRepository.findById(id).get().getInterestRate();
+
+            BigDecimal newInterest = accountInterest.add(BigDecimal.valueOf(0.01));
+            creditCardRepository.findById(id).get().setInterestRate(newInterest);
+            BigDecimal newBalance = (accountInterest.multiply(accountBalance.getAmount()));
+            creditCardRepository.findById(id).get().setBalance(new Money(newBalance));
+        }
+    }
+
     public Money findBalanceById(Long id) {
         if (creditCardRepository.findById(id).isPresent()) {
             log.info("Fetching Account Balance");
+            addInterest(id);
             return creditCardRepository.findById(id).get().getBalance();
         }else{
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
@@ -68,6 +88,7 @@ public class CreditCardService implements ICreditCardService {
         if (account.isPresent()) {
 
             account.get().setBalance(accountBalanceDTO.getBalance());
+            addInterest(id);
             creditCardRepository.save(account.get());
 
         } else {

@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +22,8 @@ public class CreditCard extends Account{
 
     private BigDecimal interestRate = BigDecimal.valueOf(0.2);
 
+    private LocalDate creationDate;
+
     public CreditCard(Money balance, AccountHolder primaryOwner, AccountHolder secondaryOwner) {
         super(balance, primaryOwner, secondaryOwner);
     }
@@ -30,6 +33,7 @@ public class CreditCard extends Account{
         super(balance, primaryOwner, secondaryOwner);
         setCreditLimit(creditLimit);
         setInterestRate(interestRate);
+        this.creationDate = LocalDate.now();
     }
 
     public void setCreditLimit(Money creditLimit) {

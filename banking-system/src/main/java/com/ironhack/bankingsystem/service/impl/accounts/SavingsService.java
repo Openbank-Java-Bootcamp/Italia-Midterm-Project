@@ -2,6 +2,7 @@ package com.ironhack.bankingsystem.service.impl.accounts;
 
 import com.ironhack.bankingsystem.DTO.AccountBalanceDTO;
 import com.ironhack.bankingsystem.DTO.accountDTOs.SavingsDTO;
+import com.ironhack.bankingsystem.DTO.accountDTOs.StudentCheckingDTO;
 import com.ironhack.bankingsystem.controller.interfaces.accounts.ISavingsController;
 import com.ironhack.bankingsystem.models.Money;
 import com.ironhack.bankingsystem.models.accounts.CreditCard;
@@ -16,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,9 +56,26 @@ public class SavingsService implements ISavingsService {
         return savingsRepository.findAll();
     }
 
+
+    public void addInterest(Long id) {
+        LocalDate dateNow = LocalDate.now();
+        LocalDate creationDate = savingsRepository.findById(id).get().getCreationDate();
+        int accountAge = dateNow.getYear() - creationDate.getYear();
+
+        if (accountAge >= 1) {
+            log.info("Interest Rate was added to your account");
+            Money accountBalance = savingsRepository.findById(id).get().getBalance();
+            BigDecimal accountInterest = savingsRepository.findById(id).get().getInterestRate();
+
+            BigDecimal newBalance = (accountInterest.multiply(accountBalance.getAmount()));
+            savingsRepository.findById(id).get().setBalance(new Money(newBalance));
+        }
+    }
+
     public Money findBalanceById(Long id) {
         if (savingsRepository.findById(id).isPresent()) {
             log.info("Fetching Account Balance");
+            addInterest(id);
             return savingsRepository.findById(id).get().getBalance();
         }else{
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
@@ -67,10 +87,13 @@ public class SavingsService implements ISavingsService {
         if (account.isPresent()) {
 
             account.get().setBalance(accountBalanceDTO.getBalance());
+            addInterest(id);
             savingsRepository.save(account.get());
 
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id wasn't found.");
         }
     }
+
+
 }

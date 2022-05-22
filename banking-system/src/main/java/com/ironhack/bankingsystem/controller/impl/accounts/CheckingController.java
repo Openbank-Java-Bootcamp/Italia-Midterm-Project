@@ -37,14 +37,13 @@ public class CheckingController implements ICheckingController {
     @ResponseStatus(HttpStatus.CREATED)
     public void saveChecking(@RequestBody CheckingDTO checkingDTO) {
 
-        System.out.println(checkingDTO.toString());
         LocalDate dateNow = LocalDate.now();
         Optional<AccountHolder> foundAccountHolder = accountHolderRepository.findById(checkingDTO.getPrimaryOwnerId());
         if(foundAccountHolder.isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No account holder with that ID");
         }
-        var birthDate = foundAccountHolder.get().getDateOfBirth();
-        var age = dateNow.getYear() - birthDate.getYear();
+        LocalDate birthDate = foundAccountHolder.get().getDateOfBirth();
+        int age = dateNow.getYear() - birthDate.getYear();
         if (age < 24) {
             StudentCheckingDTO studentCheckingDTO = new StudentCheckingDTO(checkingDTO.getBalance(),
                     checkingDTO.getPrimaryOwnerId(), checkingDTO.getSecondaryOwnerId(),
