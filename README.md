@@ -1,7 +1,7 @@
-#Midterm Banking System
+<h3> Midterm Banking System </h3> 
 
 
-1.Description of the project
+1. Description of the project
 
 This project is based on a simple Banking System, where Account Holders can make transferences between eachother aswell as Third Parties.
 <br>Both Account Holders and Third Parties must have the following conditions met to be able to carry out these transactions:
@@ -13,14 +13,14 @@ In order to receive and send money, Third-Party Users must provide their hashed 
 
 <br>The System has further features such as Pentaly Fees, Interest Rates, and Security implemetations as Authentication and Authorization.
 
-2.Technologies Used
+2. Technologies Used
 
 The project was developed using a Java/Spring Boot backend.
 <br>All information is stored in MySQL database tables
 <br>Authentication and authorization is implemented using Spring Security.
 <br>Other thechnologies were Spring Data JPA, Spring Web and Lambok, between others.
 
-3.Models
+3. Models
 
 ![image](https://user-images.githubusercontent.com/33453535/169715419-b64ead24-3c40-473e-ad25-093993ec83ab.png)<br>
 ![image](https://user-images.githubusercontent.com/33453535/169715493-0c1bd7ce-494a-4584-93e2-0817e4da684a.png)<br>
@@ -29,7 +29,7 @@ The project was developed using a Java/Spring Boot backend.
 
 
 
-4.Server routes table(Method, Route or URL, Description as columns)
+4. Server routes table(Method, Route or URL, Description as columns)
 
 <br>Some of the System's Endpoints are:
 
@@ -132,7 +132,7 @@ The project was developed using a Java/Spring Boot backend.
    
 
 
-5.Future Work
+5. Future Work
 
 The project can be improved by adding further validation and error handling with their proper testing.<br>
 Bonus features such as fraud detection could be implemented.<br>
@@ -140,7 +140,7 @@ And an over all bettered architectural design.<br>
 
 As for continuing the project, further features could be implemented to resemble the banking systems we all know and use. <br>
 
-6.Resources
+6. Resources
 
 Overall relied on previous teachings and projects. Aswell as web searches through Google, Baeldung, Oracle, StackOverflow and Thorben-Janssen mainly.<br>
 Learned a valuable lesson on relying more on my Mentors and Peers which I wish I reached out to earlier. I am greatfull<br> for all the advice and gidance they shared with me. I trully learnt a whole lot this week :)
