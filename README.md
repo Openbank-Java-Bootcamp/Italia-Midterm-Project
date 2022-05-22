@@ -143,4 +143,4 @@ As for continuing the project, further features could be implemented to resemble
 6.Resources
 
 Overall relied on previous teachings and projects. Aswell as web searches through Google, Baeldung, Oracle, StackOverflow and Thorben-Janssen mainly.<br>
-Learned a valuable lesson on relying more on my Mentors and Peers which I wish I reached out to earlier. I am greatfull<br> for all the advice and gidance they shared with me.
+Learned a valuable lesson on relying more on my Mentors and Peers which I wish I reached out to earlier. I am greatfull<br> for all the advice and gidance they shared with me. I trully learnt a whole lot this week :)
